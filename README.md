@@ -1,2 +1,2 @@
 # weather
-get temperature from API - OpenWeatherMap - laravel project
+get temperature from API - OpenWeatherMap - Laravel project
