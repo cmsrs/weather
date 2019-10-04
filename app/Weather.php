@@ -40,7 +40,6 @@ class Weather extends Model
       $row->api_update = Carbon::now()->toDateTimeString();
       $row->save();
       $rowNew = $this->getFirstRecordByCity( $city );
-
       return $rowNew->toArray();
     }
 
@@ -51,7 +50,6 @@ class Weather extends Model
     $weather = new Weather;
     $weather->saveDataToDb($data);
     $rowNew = $this->getFirstRecordByCity( $city );
-
     return $rowNew->toArray();
   }
 
