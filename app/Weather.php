@@ -21,7 +21,7 @@ class Weather extends Model
   /**
   * get data from cache or API by the name of the city
   */
-  public function getDataFromCacheOrApiByCity( $city = null, $tmp = false )
+  public function getDataFromCacheOrApiByCity( $city = null)
   {
     if(empty($city)){
       $city = Weather::$city;
