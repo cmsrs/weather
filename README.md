@@ -1,5 +1,5 @@
 # Weather
-get temperature from API - OpenWeatherMap - Laravel project
+Get temperature from API - OpenWeatherMap - Laravel project
 
 * install dependency
 
