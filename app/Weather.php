@@ -29,18 +29,17 @@ class Weather extends Model
 
     $row = $this->getFirstRecordByCity( $city );
     if($row ){
-      if(strtotime($row->api_update) + $this->cacheTimeMin * 60 -  time() > 0 ){
+      if(strtotime($row->api_update) + $this->cacheTimeMin * 60 -  time() > 0 ){ //60*60 = 60 min
         return $row; //not exceed 60 min
       }
 
       //update record
       $req = Weather::GetDataFromOpenWeatherApi();
-      $row->temp = Weather::GetTempFromReq($req);
-      $row->humidity = Weather::GetHumidityFromReq($req);
-      $row->api_update = Carbon::now()->toDateTimeString();
-      $row->save();
-      $rowNew = $this->getFirstRecordByCity( $city );
-      return $rowNew->toArray();
+      $data['temp'] = Weather::GetTempFromReq($req);
+      $data['humidity'] = Weather::GetHumidityFromReq($req);
+
+      $row->saveDataToDb($data);
+      return $this->getFirstRecordByCity( $city );
     }
 
     //new record
@@ -49,8 +48,7 @@ class Weather extends Model
     $data['humidity'] = Weather::GetHumidityFromReq($req);
     $weather = new Weather;
     $weather->saveDataToDb($data);
-    $rowNew = $this->getFirstRecordByCity( $city );
-    return $rowNew->toArray();
+    return $this->getFirstRecordByCity( $city );
   }
 
   /**

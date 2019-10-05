@@ -4,6 +4,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Weather;
+use Carbon\Carbon;
 
 
 
@@ -22,6 +23,7 @@ class WeatherTest extends TestCase
 
       //data in db
       $data2 = $weather->getDataFromCacheOrApiByCity();
+
       $this->assertNotEmpty($data2['api_update']);
       $this->assertEquals($data['api_update'], $data2['api_update']);
 
@@ -29,7 +31,8 @@ class WeatherTest extends TestCase
 
       //data in db, and api_update - 55 min from now
       $weatherRow = Weather::query()->where('city', Weather::$city )->first();
-      $nowMinus55 = date( 'Y-m-d G:i:s', time() - 55*60);
+      $nowMinus55 = Carbon::now()->subMinutes(55)->toDateTimeString();
+
       $weatherRow->api_update  = $nowMinus55;
       $weatherRow->save();
       $data3 = $weather->getDataFromCacheOrApiByCity();
@@ -38,7 +41,8 @@ class WeatherTest extends TestCase
 
       //data in db, and api_update - 65 min from now
       $weatherRow2 = Weather::query()->where('city', Weather::$city )->first();
-      $nowMinus65 = date( 'Y-m-d G:i:s', time() - 65*60);
+      //$nowMinus65 = date( 'Y-m-d G:i:s', time() - 65*60);
+      $nowMinus65 = Carbon::now()->subMinutes(65)->toDateTimeString();
       $weatherRow2->api_update  = $nowMinus65;
       $weatherRow2->save();
       //print_r($weatherRow2->toArray());
