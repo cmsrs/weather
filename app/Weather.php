@@ -33,7 +33,7 @@ class Weather extends Model
         return $row; //not exceed 60 min
       }
 
-      //update record
+      //update record - time exceed 60 min
       $req = Weather::GetDataFromOpenWeatherApi();
       $data['temp'] = Weather::GetTempFromReq($req);
       $data['humidity'] = Weather::GetHumidityFromReq($req);

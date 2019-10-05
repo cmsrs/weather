@@ -45,9 +45,7 @@ class WeatherTest extends TestCase
       $nowMinus65 = Carbon::now()->subMinutes(65)->toDateTimeString();
       $weatherRow2->api_update  = $nowMinus65;
       $weatherRow2->save();
-      //print_r($weatherRow2->toArray());
       $data4 = $weather->getDataFromCacheOrApiByCity();
-      //echo "\n"."--".$data['api_update'].'--'.$data2['api_update'].'--'.$data3['api_update'].'--'.$data4['api_update'];
       $this->assertNotEmpty($data4['api_update']);
       $this->assertNotEquals($nowMinus65, $data4['api_update']);
       //print_r($data4);
