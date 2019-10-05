@@ -11,7 +11,7 @@ class Weather extends Model
 
   public static $city = 'Warsaw';
 
-  private  $cacheTimeMin = 60;
+  private  $cacheTimeMin = 60;//60;
 
   protected $fillable = [
       'city', 'temp', 'humidity', 'api_update'
