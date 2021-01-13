@@ -31,6 +31,7 @@ php artisan migrate
 ```bash
 ./vendor/bin/phpunit
 ```
+
 Print screen
 
 <img src="https://github.com/cmsrs/weather/blob/task1/zrzut.png" alt="Print screen" />
